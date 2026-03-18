@@ -2,7 +2,7 @@ package com.taller.patrones.infrastructure.combat;
 
 import com.taller.patrones.domain.Attack;
 
-public class DeafaultAttackFactory implements AttackFactory {
+public class DefaultAttackFactory implements AttackFactory {
     @Override
     public Attack create(String name) {
         String n = name != null ? name.toUpperCase() : "";

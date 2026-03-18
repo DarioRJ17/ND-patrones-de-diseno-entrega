@@ -4,6 +4,7 @@ import com.taller.patrones.domain.Attack;
 import com.taller.patrones.domain.Battle;
 import com.taller.patrones.domain.Character;
 import com.taller.patrones.infrastructure.combat.CombatEngine;
+import com.taller.patrones.infrastructure.combat.DefaultAttackFactory;
 import com.taller.patrones.infrastructure.persistence.BattleRepository;
 
 import java.util.List;
@@ -17,10 +18,10 @@ import java.util.UUID;
  */
 public class BattleService {
 
-    private final CombatEngine combatEngine = new CombatEngine();
+    private final CombatEngine combatEngine = new CombatEngine(new DefaultAttackFactory());
     private final BattleRepository battleRepository = new BattleRepository();
 
-    public static final List<String> PLAYER_ATTACKS = List.of("TACKLE", "SLASH", "FIREBALL", "ICE_BEAM", "POISON_STING", "THUNDER");
+    public static final List<String> PLAYER_ATTACKS = List.of("TACKLE", "SLASH", "FIREBALL", "ICE_BEAM", "POISON_STING", "THUNDER", "METEORO");
     public static final List<String> ENEMY_ATTACKS = List.of("TACKLE", "SLASH", "FIREBALL");
 
     public BattleStartResult startBattle(String playerName, String enemyName) {
