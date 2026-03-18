@@ -7,7 +7,7 @@ public class DefaultAttackFactory implements AttackFactory {
     public Attack create(String name) {
         String n = name != null ? name.toUpperCase() : "";
         return switch (n) {
-            case "TACKLE"       -> new Attack("Tackle", 40, Attack.AttackType.NORMAL);
+            case "TACKLE"       -> new Attack("Tackle", 40, Attack.AttackType.CRITICAL);
             case "SLASH"        -> new Attack("Slash", 55, Attack.AttackType.NORMAL);
             case "FIREBALL"     -> new Attack("Fireball", 80, Attack.AttackType.SPECIAL);
             case "ICE_BEAM"     -> new Attack("Ice Beam", 70, Attack.AttackType.SPECIAL);

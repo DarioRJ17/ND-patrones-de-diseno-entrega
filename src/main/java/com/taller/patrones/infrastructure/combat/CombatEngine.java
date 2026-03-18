@@ -1,7 +1,10 @@
 package com.taller.patrones.infrastructure.combat;
 
-import com.taller.patrones.domain.Attack;
+import com.taller.patrones.domain.*;
 import com.taller.patrones.domain.Character;
+
+import java.util.EnumMap;
+import java.util.Map;
 
 /**
  * Motor de combate. Calcula daño y crea ataques.
@@ -15,9 +18,14 @@ public class CombatEngine {
      * Cada ataque nuevo se implementará en la nueva factoría de ataque
      */
     private final AttackFactory attackFactory;
+    private final Map<Attack.AttackType, DamageStrategy> damageStrategies = new EnumMap<>(Attack.AttackType.class);
 
     public CombatEngine(AttackFactory attackFactory) {
         this.attackFactory = attackFactory;
+        damageStrategies.put(Attack.AttackType.NORMAL,  new NormalDamageStrategy());
+        damageStrategies.put(Attack.AttackType.SPECIAL, new SpecialDamageStrategy());
+        damageStrategies.put(Attack.AttackType.STATUS,  new StatusDamageStrategy());
+        damageStrategies.put(Attack.AttackType.CRITICAL, new CriticalDamageStrategy());
     }
 
     public Attack createAttack(String name) {
@@ -29,18 +37,11 @@ public class CombatEngine {
      * Cada fórmula nueva (ej. crítico, veneno con tiempo) requiere modificar este switch.
      */
     public int calculateDamage(Character attacker, Character defender, Attack attack) {
-        return switch (attack.getType()) {
-            case NORMAL -> {
-                int raw = attacker.getAttack() * attack.getBasePower() / 100;
-                yield Math.max(1, raw - defender.getDefense());
-            }
-            case SPECIAL -> {
-                int raw = attacker.getAttack() * attack.getBasePower() / 100;
-                int effectiveDef = defender.getDefense() / 2;
-                yield Math.max(1, raw - effectiveDef);
-            }
-            case STATUS -> attacker.getAttack(); // Los de estado no hacen daño directo... ¿o sí?
-            default -> 0;
-        };
+        DamageStrategy strategy = damageStrategies.get(attack.getType());
+        if (strategy == null) {
+            // fallback por si falta alguna estrategia
+            strategy = new NormalDamageStrategy();
+        }
+        return strategy.calculate(attacker, defender, attack);
     }
 }
