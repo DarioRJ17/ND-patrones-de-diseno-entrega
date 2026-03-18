@@ -13,7 +13,19 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class BattleRepository {
 
-    private static final Map<String, Battle> battles = new ConcurrentHashMap<>();
+    // ÚNICA instancia del repositorio
+    private static final BattleRepository INSTANCE = new BattleRepository();
+
+    // Mapa interno (ya no es static)
+    private final Map<String, Battle> battles = new ConcurrentHashMap<>();
+
+    // Constructor privado: evita new desde fuera
+    private BattleRepository() { }
+
+    // Punto de acceso global al repositorio
+    public static BattleRepository getInstance() {
+        return INSTANCE;
+    }
 
     public void save(String id, Battle battle) {
         battles.put(id, battle);

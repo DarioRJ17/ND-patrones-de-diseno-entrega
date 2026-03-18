@@ -19,8 +19,7 @@ import java.util.UUID;
 public class BattleService {
 
     private final CombatEngine combatEngine = new CombatEngine(new DefaultAttackFactory());
-    private final BattleRepository battleRepository = new BattleRepository();
-
+    private final BattleRepository battleRepository = BattleRepository.getInstance();
     public static final List<String> PLAYER_ATTACKS = List.of("TACKLE", "SLASH", "FIREBALL", "ICE_BEAM", "POISON_STING", "THUNDER", "METEORO");
     public static final List<String> ENEMY_ATTACKS = List.of("TACKLE", "SLASH", "FIREBALL");
 
