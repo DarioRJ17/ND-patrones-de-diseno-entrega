@@ -1,5 +1,6 @@
 com\taller\patrones\domain\Attack$AttackType.class
 com\taller\patrones\application\BattleService.class
+com\taller\patrones\interfaces\rest\adapter\ExternalBattleAdapter.class
 com\taller\patrones\domain\StatusDamageStrategy.class
 com\taller\patrones\infrastructure\persistence\BattleRepository.class
 com\taller\patrones\interfaces\rest\BattleController.class
@@ -13,6 +14,8 @@ com\taller\patrones\application\BattleService$BattleStartResult.class
 com\taller\patrones\domain\CriticalDamageStrategy.class
 com\taller\patrones\CombatSimulatorApplication.class
 com\taller\patrones\domain\DamageStrategy.class
+com\taller\patrones\interfaces\rest\adapter\ExternalBattleAdapter$ExternalBattleCommand.class
 com\taller\patrones\domain\Attack.class
+com\taller\patrones\interfaces\rest\dto\ExternalBattleRequest.class
 com\taller\patrones\domain\Battle.class
 com\taller\patrones\domain\Character$Builder.class

@@ -1,10 +1,12 @@
 C:\Users\Darío Román\Desktop\NEXT DIGITAL\ND-patrones-de-diseno-entrega\src\main\java\com\taller\patrones\infrastructure\combat\CombatEngine.java
 C:\Users\Darío Román\Desktop\NEXT DIGITAL\ND-patrones-de-diseno-entrega\src\main\java\com\taller\patrones\domain\NormalDamageStrategy.java
 C:\Users\Darío Román\Desktop\NEXT DIGITAL\ND-patrones-de-diseno-entrega\src\main\java\com\taller\patrones\domain\Attack.java
+C:\Users\Darío Román\Desktop\NEXT DIGITAL\ND-patrones-de-diseno-entrega\src\main\java\com\taller\patrones\interfaces\rest\adapter\ExternalBattleAdapter.java
 C:\Users\Darío Román\Desktop\NEXT DIGITAL\ND-patrones-de-diseno-entrega\src\main\java\com\taller\patrones\CombatSimulatorApplication.java
 C:\Users\Darío Román\Desktop\NEXT DIGITAL\ND-patrones-de-diseno-entrega\src\main\java\com\taller\patrones\application\BattleService.java
 C:\Users\Darío Román\Desktop\NEXT DIGITAL\ND-patrones-de-diseno-entrega\src\main\java\com\taller\patrones\domain\CriticalDamageStrategy.java
 C:\Users\Darío Román\Desktop\NEXT DIGITAL\ND-patrones-de-diseno-entrega\src\main\java\com\taller\patrones\infrastructure\combat\AttackFactory.java
+C:\Users\Darío Román\Desktop\NEXT DIGITAL\ND-patrones-de-diseno-entrega\src\main\java\com\taller\patrones\interfaces\rest\dto\ExternalBattleRequest.java
 C:\Users\Darío Román\Desktop\NEXT DIGITAL\ND-patrones-de-diseno-entrega\src\main\java\com\taller\patrones\domain\Battle.java
 C:\Users\Darío Román\Desktop\NEXT DIGITAL\ND-patrones-de-diseno-entrega\src\main\java\com\taller\patrones\domain\DamageStrategy.java
 C:\Users\Darío Román\Desktop\NEXT DIGITAL\ND-patrones-de-diseno-entrega\src\main\java\com\taller\patrones\infrastructure\combat\DefaultAttackFactory.java
