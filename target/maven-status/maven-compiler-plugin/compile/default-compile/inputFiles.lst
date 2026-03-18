@@ -8,6 +8,7 @@ C:\Users\Darío Román\Desktop\NEXT DIGITAL\ND-patrones-de-diseno-entrega\src\ma
 C:\Users\Darío Román\Desktop\NEXT DIGITAL\ND-patrones-de-diseno-entrega\src\main\java\com\taller\patrones\application\DamageEventPublisher.java
 C:\Users\Darío Román\Desktop\NEXT DIGITAL\ND-patrones-de-diseno-entrega\src\main\java\com\taller\patrones\CombatSimulatorApplication.java
 C:\Users\Darío Román\Desktop\NEXT DIGITAL\ND-patrones-de-diseno-entrega\src\main\java\com\taller\patrones\application\BattleService.java
+C:\Users\Darío Román\Desktop\NEXT DIGITAL\ND-patrones-de-diseno-entrega\src\main\java\com\taller\patrones\domain\AttackCommand.java
 C:\Users\Darío Román\Desktop\NEXT DIGITAL\ND-patrones-de-diseno-entrega\src\main\java\com\taller\patrones\domain\CriticalDamageStrategy.java
 C:\Users\Darío Román\Desktop\NEXT DIGITAL\ND-patrones-de-diseno-entrega\src\main\java\com\taller\patrones\infrastructure\combat\AttackFactory.java
 C:\Users\Darío Román\Desktop\NEXT DIGITAL\ND-patrones-de-diseno-entrega\src\main\java\com\taller\patrones\interfaces\rest\dto\ExternalBattleRequest.java
@@ -18,4 +19,5 @@ C:\Users\Darío Román\Desktop\NEXT DIGITAL\ND-patrones-de-diseno-entrega\src\ma
 C:\Users\Darío Román\Desktop\NEXT DIGITAL\ND-patrones-de-diseno-entrega\src\main\java\com\taller\patrones\domain\Character.java
 C:\Users\Darío Román\Desktop\NEXT DIGITAL\ND-patrones-de-diseno-entrega\src\main\java\com\taller\patrones\domain\StatusDamageStrategy.java
 C:\Users\Darío Román\Desktop\NEXT DIGITAL\ND-patrones-de-diseno-entrega\src\main\java\com\taller\patrones\infrastructure\persistence\BattleRepository.java
+C:\Users\Darío Román\Desktop\NEXT DIGITAL\ND-patrones-de-diseno-entrega\src\main\java\com\taller\patrones\domain\BattleCommand.java
 C:\Users\Darío Román\Desktop\NEXT DIGITAL\ND-patrones-de-diseno-entrega\src\main\java\com\taller\patrones\domain\SpecialDamageStrategy.java

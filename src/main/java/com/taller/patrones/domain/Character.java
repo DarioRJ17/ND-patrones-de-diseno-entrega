@@ -40,6 +40,14 @@ public class Character {
         return maxHp > 0 ? (double) currentHp / maxHp * 100 : 0;
     }
 
+    public void setCurrentHp(int hp) {
+        this.currentHp = Math.max(0, Math.min(maxHp, hp));
+    }
+
+    public void heal(int amount) {
+        this.currentHp = Math.min(maxHp, currentHp + amount);
+    }
+
     public static class Builder {
         private String name;
         private int maxHp = 100;

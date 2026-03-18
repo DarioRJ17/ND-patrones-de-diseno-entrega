@@ -1,4 +1,5 @@
 com\taller\patrones\domain\Attack$AttackType.class
+com\taller\patrones\domain\BattleCommand.class
 com\taller\patrones\application\BattleService.class
 com\taller\patrones\interfaces\rest\adapter\ExternalBattleAdapter.class
 com\taller\patrones\domain\StatusDamageStrategy.class
@@ -23,3 +24,4 @@ com\taller\patrones\domain\Battle.class
 com\taller\patrones\application\DamageEventPublisher.class
 com\taller\patrones\domain\Character$Builder.class
 com\taller\patrones\infrastructure\AuditLogDamageObserver.class
+com\taller\patrones\domain\AttackCommand.class

@@ -1,13 +1,13 @@
 package com.taller.patrones.application;
 
-import com.taller.patrones.domain.Attack;
-import com.taller.patrones.domain.Battle;
+import com.taller.patrones.domain.*;
 import com.taller.patrones.domain.Character;
-import com.taller.patrones.domain.DamageEvent;
 import com.taller.patrones.infrastructure.combat.CombatEngine;
 import com.taller.patrones.infrastructure.combat.DefaultAttackFactory;
 import com.taller.patrones.infrastructure.persistence.BattleRepository;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.List;
 import java.util.UUID;
 
@@ -22,6 +22,7 @@ public class BattleService {
     private final CombatEngine combatEngine = new CombatEngine(new DefaultAttackFactory());
     private final BattleRepository battleRepository = BattleRepository.getInstance();
     private final DamageEventPublisher damagePublisher = new DamageEventPublisher();
+    private final Deque<BattleCommand> history = new ArrayDeque<>();
     public static final List<String> PLAYER_ATTACKS = List.of("TACKLE", "SLASH", "FIREBALL", "ICE_BEAM", "POISON_STING", "THUNDER", "METEORO");
     public static final List<String> ENEMY_ATTACKS = List.of("TACKLE", "SLASH", "FIREBALL");
 
@@ -62,8 +63,15 @@ public class BattleService {
         if (battle == null || battle.isFinished() || !battle.isPlayerTurn()) return;
 
         Attack attack = combatEngine.createAttack(attackName);
-        int damage = combatEngine.calculateDamage(battle.getPlayer(), battle.getEnemy(), attack);
-        applyDamage(battle, battle.getPlayer(), battle.getEnemy(), damage, attack);
+        BattleCommand cmd = new AttackCommand(
+                battle,
+                battle.getPlayer(),
+                battle.getEnemy(),
+                attack,
+                combatEngine
+        );
+        cmd.execute();
+        history.push(cmd);
     }
 
     public void executeEnemyAttack(String battleId, String attackName) {
@@ -71,8 +79,21 @@ public class BattleService {
         if (battle == null || battle.isFinished() || battle.isPlayerTurn()) return;
 
         Attack attack = combatEngine.createAttack(attackName != null ? attackName : "TACKLE");
-        int damage = combatEngine.calculateDamage(battle.getEnemy(), battle.getPlayer(), attack);
-        applyDamage(battle, battle.getEnemy(), battle.getPlayer(), damage, attack);
+        BattleCommand cmd = new AttackCommand(
+                battle,
+                battle.getEnemy(),
+                battle.getPlayer(),
+                attack,
+                combatEngine
+        );
+        cmd.execute();
+        history.push(cmd);
+    }
+
+    public void undoLastCommand() {
+        if (history.isEmpty()) return;
+        BattleCommand last = history.pop();
+        last.undo();
     }
 
     private void applyDamage(Battle battle, Character attacker, Character defender, int damage, Attack attack) {

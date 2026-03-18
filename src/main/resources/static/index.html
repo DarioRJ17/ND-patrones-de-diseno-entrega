@@ -434,6 +434,11 @@
             <div class="command-panel">
                 <h3 id="turn-indicator">▶ Tu turno - Elige un ataque:</h3>
                 <div class="attack-grid" id="attack-buttons"></div>
+                <div style="margin-top: 0.75rem; text-align: right;">
+                    <button class="attack-btn" id="undo-button" onclick="undoLastAttack()">
+                        Deshacer último ataque
+                    </button>
+                </div>
             </div>
 
             <div class="message-box">
@@ -446,6 +451,27 @@
     <script>
         let battleId = null;
         const API_BASE = window.location.origin;
+
+        async function undoLastAttack() {
+            if (!battleId) return;
+
+            try {
+                const res = await fetch(API_BASE + `/api/battle/${battleId}/undo`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' }
+                });
+
+                if (!res.ok) {
+                    console.error('Error al deshacer ataque, status =', res.status);
+                    return;
+                }
+
+                const data = await res.json();
+                updateUI(data);
+            } catch (e) {
+                console.error('Error en undoLastAttack:', e);
+            }
+        }
 
         function handleImgError(img, fallbackSrc) {
             if (img.dataset.tried) {

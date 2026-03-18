@@ -25,6 +25,13 @@ public class BattleController {
         battleService.getDamagePublisher().subscribe(new AuditLogDamageObserver());
     }
 
+    @PostMapping("/{battleId}/undo")
+    public ResponseEntity<Map<String, Object>> undo(@PathVariable String battleId) {
+        battleService.undoLastCommand();
+        Battle battle = battleService.getBattle(battleId);
+        return ResponseEntity.ok(toBattleDto(battle));
+    }
+
     @PostMapping("/start")
     public ResponseEntity<Map<String, Object>> startBattle(@RequestBody(required = false) Map<String, String> body) {
         String playerName = body != null && body.containsKey("playerName") ? body.get("playerName") : null;
