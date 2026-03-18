@@ -3,6 +3,7 @@ package com.taller.patrones.interfaces.rest;
 import com.taller.patrones.application.BattleService;
 import com.taller.patrones.domain.Battle;
 import com.taller.patrones.domain.Character;
+import com.taller.patrones.infrastructure.AuditLogDamageObserver;
 import com.taller.patrones.interfaces.rest.adapter.ExternalBattleAdapter;
 import com.taller.patrones.interfaces.rest.dto.ExternalBattleRequest;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,11 @@ public class BattleController {
 
     private final BattleService battleService = new BattleService();
     private final ExternalBattleAdapter externalBattleAdapter = new ExternalBattleAdapter();
+
+    public BattleController() {
+        // De momento el único observer es éste, en el futuro se podrían añadir más
+        battleService.getDamagePublisher().subscribe(new AuditLogDamageObserver());
+    }
 
     @PostMapping("/start")
     public ResponseEntity<Map<String, Object>> startBattle(@RequestBody(required = false) Map<String, String> body) {

@@ -3,6 +3,7 @@ package com.taller.patrones.application;
 import com.taller.patrones.domain.Attack;
 import com.taller.patrones.domain.Battle;
 import com.taller.patrones.domain.Character;
+import com.taller.patrones.domain.DamageEvent;
 import com.taller.patrones.infrastructure.combat.CombatEngine;
 import com.taller.patrones.infrastructure.combat.DefaultAttackFactory;
 import com.taller.patrones.infrastructure.persistence.BattleRepository;
@@ -20,8 +21,13 @@ public class BattleService {
 
     private final CombatEngine combatEngine = new CombatEngine(new DefaultAttackFactory());
     private final BattleRepository battleRepository = BattleRepository.getInstance();
+    private final DamageEventPublisher damagePublisher = new DamageEventPublisher();
     public static final List<String> PLAYER_ATTACKS = List.of("TACKLE", "SLASH", "FIREBALL", "ICE_BEAM", "POISON_STING", "THUNDER", "METEORO");
     public static final List<String> ENEMY_ATTACKS = List.of("TACKLE", "SLASH", "FIREBALL");
+
+    public DamageEventPublisher getDamagePublisher() {
+        return damagePublisher;
+    }
 
     public BattleStartResult startBattle(String playerName, String enemyName) {
         Character player = new Character.Builder()
@@ -74,6 +80,11 @@ public class BattleService {
         String target = defender == battle.getPlayer() ? "player" : "enemy";
         battle.setLastDamage(damage, target);
         battle.log(attacker.getName() + " usa " + attack.getName() + " y hace " + damage + " de daño a " + defender.getName());
+
+        // Se crea el evento y se publica
+        DamageEvent event = new DamageEvent(battle, attacker, defender, attack, damage);
+        damagePublisher.publish(event);
+
         battle.switchTurn();
         if (!defender.isAlive()) {
             battle.finish(attacker.getName());
