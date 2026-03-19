@@ -3,6 +3,7 @@ C:\Users\Darío Román\Desktop\NEXT DIGITAL\ND-patrones-de-diseno-entrega\src\ma
 C:\Users\Darío Román\Desktop\NEXT DIGITAL\ND-patrones-de-diseno-entrega\src\main\java\com\taller\patrones\domain\NormalDamageStrategy.java
 C:\Users\Darío Román\Desktop\NEXT DIGITAL\ND-patrones-de-diseno-entrega\src\main\java\com\taller\patrones\domain\DamageObserver.java
 C:\Users\Darío Román\Desktop\NEXT DIGITAL\ND-patrones-de-diseno-entrega\src\main\java\com\taller\patrones\infrastructure\AuditLogDamageObserver.java
+C:\Users\Darío Román\Desktop\NEXT DIGITAL\ND-patrones-de-diseno-entrega\src\main\java\com\taller\patrones\domain\CombatFacade.java
 C:\Users\Darío Román\Desktop\NEXT DIGITAL\ND-patrones-de-diseno-entrega\src\main\java\com\taller\patrones\domain\Attack.java
 C:\Users\Darío Román\Desktop\NEXT DIGITAL\ND-patrones-de-diseno-entrega\src\main\java\com\taller\patrones\interfaces\rest\adapter\ExternalBattleAdapter.java
 C:\Users\Darío Román\Desktop\NEXT DIGITAL\ND-patrones-de-diseno-entrega\src\main\java\com\taller\patrones\application\DamageEventPublisher.java
