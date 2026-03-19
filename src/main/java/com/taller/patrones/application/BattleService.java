@@ -23,7 +23,7 @@ public class BattleService {
     private final BattleRepository battleRepository = BattleRepository.getInstance();
     private final DamageEventPublisher damagePublisher = new DamageEventPublisher();
     private final Deque<BattleCommand> history = new ArrayDeque<>();
-    public static final List<String> PLAYER_ATTACKS = List.of("TACKLE", "SLASH", "FIREBALL", "ICE_BEAM", "POISON_STING", "THUNDER", "METEORO");
+    public static final List<String> PLAYER_ATTACKS = List.of("TACKLE", "SLASH", "FIREBALL", "ICE_BEAM", "POISON_STING", "THUNDER", "METEORO", "TRIPLE_COMBO");
     public static final List<String> ENEMY_ATTACKS = List.of("TACKLE", "SLASH", "FIREBALL");
 
     public DamageEventPublisher getDamagePublisher() {
@@ -94,22 +94,6 @@ public class BattleService {
         if (history.isEmpty()) return;
         BattleCommand last = history.pop();
         last.undo();
-    }
-
-    private void applyDamage(Battle battle, Character attacker, Character defender, int damage, Attack attack) {
-        defender.takeDamage(damage);
-        String target = defender == battle.getPlayer() ? "player" : "enemy";
-        battle.setLastDamage(damage, target);
-        battle.log(attacker.getName() + " usa " + attack.getName() + " y hace " + damage + " de daño a " + defender.getName());
-
-        // Se crea el evento y se publica
-        DamageEvent event = new DamageEvent(battle, attacker, defender, attack, damage);
-        damagePublisher.publish(event);
-
-        battle.switchTurn();
-        if (!defender.isAlive()) {
-            battle.finish(attacker.getName());
-        }
     }
 
     public BattleStartResult startBattleFromExternal(String fighter1Name, int fighter1Hp, int fighter1Atk,

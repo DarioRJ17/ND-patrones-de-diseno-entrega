@@ -32,6 +32,31 @@ public class CombatEngine {
         return attackFactory.create(name);
     }
 
+    public void applyAttack(Battle battle, Character attacker, Character defender, Attack attack) {
+        if (attack instanceof CompositeAttack combo) {
+            for (Attack inner : combo.getAttacks()) {
+                applySingleAttack(battle, attacker, defender, inner);
+            }
+        } else {
+            applySingleAttack(battle, attacker, defender, attack);
+        }
+    }
+
+    private void applySingleAttack(Battle battle, Character attacker, Character defender, Attack attack) {
+        int damage = calculateDamage(attacker, defender, attack);
+        defender.takeDamage(damage);
+
+        String target = defender == battle.getPlayer() ? "player" : "enemy";
+        battle.setLastDamage(damage, target);
+        battle.log(attacker.getName() + " usa " + attack.getName()
+                + " y hace " + damage + " de daño a " + defender.getName());
+
+        battle.switchTurn();
+        if (!defender.isAlive()) {
+            battle.finish(attacker.getName());
+        }
+    }
+
     /**
      * Calcula el daño según el tipo de ataque.
      * Cada fórmula nueva (ej. crítico, veneno con tiempo) requiere modificar este switch.
@@ -39,7 +64,6 @@ public class CombatEngine {
     public int calculateDamage(Character attacker, Character defender, Attack attack) {
         DamageStrategy strategy = damageStrategies.get(attack.getType());
         if (strategy == null) {
-            // fallback por si falta alguna estrategia
             strategy = new NormalDamageStrategy();
         }
         return strategy.calculate(attacker, defender, attack);

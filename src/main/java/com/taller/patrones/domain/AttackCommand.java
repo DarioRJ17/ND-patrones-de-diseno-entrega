@@ -27,19 +27,13 @@ public class AttackCommand implements BattleCommand {
 
     @Override
     public void execute() {
-        // guardar HP antes del ataque
+        // guardar HP antes del ataque (para undo)
         previousHp = defender.getCurrentHp();
 
-        int damage = combatEngine.calculateDamage(attacker, defender, attack);
-        defender.takeDamage(damage);
-
-        String target = defender == battle.getPlayer() ? "player" : "enemy";
-        battle.setLastDamage(damage, target);
-        battle.log(attacker.getName() + " usa " + attack.getName()
-                + " y hace " + damage + " de daño a " + defender.getName());
-
-        battle.switchTurn();
+        // delega toda la lógica de daño en el engine, que ya sabe de CompositeAttack
+        combatEngine.applyAttack(battle, attacker, defender, attack);
     }
+
 
     @Override
     public void undo() {

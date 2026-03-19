@@ -15,6 +15,7 @@ com\taller\patrones\domain\Character.class
 com\taller\patrones\domain\NormalDamageStrategy.class
 com\taller\patrones\application\BattleService$BattleStartResult.class
 com\taller\patrones\domain\CombatFacade$BattleStartDto.class
+com\taller\patrones\domain\CompositeAttack.class
 com\taller\patrones\domain\CombatFacade.class
 com\taller\patrones\domain\CriticalDamageStrategy.class
 com\taller\patrones\CombatSimulatorApplication.class
